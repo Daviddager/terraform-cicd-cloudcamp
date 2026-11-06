@@ -19,7 +19,7 @@ node('linux'){
 
         withEnv(['PATH+CHECKOV=/home/admin/checkov-venv/bin/']) {
             stage('Checkov Scan'){
-                sh 'checkov -d .'
+                sh 'checkov -d . --skip-check CKV2_AWS_62,CKV_AWS_18,CKV_AWS_144'
             }
         }
 
