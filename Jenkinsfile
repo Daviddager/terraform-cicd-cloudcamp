@@ -16,6 +16,11 @@ node('linux'){
         stage('Terraform Validate'){
             sh 'terraform validate && terraform fmt'
         }
+
+        stage('Checkov Scan'){
+            sh 'source ~/checkov-venv/bin/activate && checkov -d .'
+        }
+
         stage('Terraform Plan'){
             sh 'terraform plan'
         }
