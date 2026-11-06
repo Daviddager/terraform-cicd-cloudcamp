@@ -17,8 +17,10 @@ node('linux'){
             sh 'terraform validate && terraform fmt'
         }
 
-        stage('Checkov Scan'){
-            sh 'source ~/checkov-venv/bin/activate && checkov -d .'
+        withEnv(['PATH+CHECKOV=/home/admin/checkov-venv/bin/']) {
+            stage('Checkov Scan'){
+                sh 'checkov -d .'
+            }
         }
 
         stage('Terraform Plan'){
